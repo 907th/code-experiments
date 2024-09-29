@@ -18,7 +18,12 @@ void va_arg_test(int first_arg, ...) {
   va_end(argptr);
 }
 
+void no_args_func() {
+  printf("no_args_func!\n");
+}
+
 int main(void) {
+  no_args_func();
   va_arg_test(1, "Hello!", 1LL << 50);
   return 0;
 }
