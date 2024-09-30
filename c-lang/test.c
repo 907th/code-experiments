@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-void va_arg_test(int first_arg, ...) {
-  printf("1st = %d\n", first_arg);
-
+void va_arg_test(...) {
   va_list argptr;
-  va_start(argptr, first_arg);
+  va_start(argptr);
+
+  int first_arg;
+  first_arg = va_arg(argptr, int);
+  printf("1st = %d\n", first_arg);
 
   char *second_arg;
   second_arg = va_arg(argptr, char*);
@@ -18,12 +20,7 @@ void va_arg_test(int first_arg, ...) {
   va_end(argptr);
 }
 
-void no_args_func() {
-  printf("no_args_func!\n");
-}
-
 int main(void) {
-  no_args_func();
   va_arg_test(1, "Hello!", 1LL << 50);
   return 0;
 }

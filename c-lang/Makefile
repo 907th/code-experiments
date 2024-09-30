@@ -1,4 +1,4 @@
-CC=gcc
+CC=gcc-14
 CFLAGS=-g -Wall -W -ansi -pedantic -std=c2x
 
 .PHONY: run
