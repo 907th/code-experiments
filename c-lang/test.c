@@ -1,26 +1,19 @@
 #include <stdio.h>
-#include <stdarg.h>
-
-void va_arg_test(...) {
-  va_list argptr;
-  va_start(argptr);
-
-  int first_arg;
-  first_arg = va_arg(argptr, int);
-  printf("1st = %d\n", first_arg);
-
-  char *second_arg;
-  second_arg = va_arg(argptr, char*);
-  printf("2nd = %s\n", second_arg);
-
-  long long int third_arg;
-  third_arg = va_arg(argptr, long long int);
-  printf("3rd = %lld\n", third_arg);
-
-  va_end(argptr);
-}
 
 int main(void) {
-  va_arg_test(1, "Hello!", 1LL << 50);
+  unsigned long a = 1L; // 8 байт
+  long long b = -1LL;   // 8 байт
+  if (a > b) {          // Сравнение производится в unsigned long long!
+    printf("1 > -1\n");
+  } else {
+    printf("1 <= -1\n");
+  }
   return 0;
 }
+
+// test.c: In function 'main':
+// test.c:6:9: warning: comparison of integer expressions of different signedness: 'long unsigned int' and 'long long int' [-Wsign-compare]
+//     6 |   if (a > b) {          // Оба аргумента конвертируются в unsigned long long!
+//       |         ^
+// ./a.out
+// 1 <= -1
